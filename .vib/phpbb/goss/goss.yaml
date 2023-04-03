@@ -1,5 +1,0 @@
-file:
-  /bitnami/phpbb:
-    exists: true
-    mode: "2755"
-    filetype: directory
