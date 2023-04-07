@@ -6,7 +6,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 6.0.5
-    created: "2023-04-06T16:20:30.9979878-05:00"
+    created: "2023-04-07T13:49:58.41437-05:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -42,7 +42,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 3.11.13
-    created: "2023-04-06T16:20:31.003169-05:00"
+    created: "2023-04-07T13:49:58.4198274-05:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -69,4 +69,36 @@ entries:
     urls:
     - https://nickmman.github.io/bitnami-charts-argocd-fixes/rabbitmq-11.12.3.tgz
     version: 11.12.3
-generated: "2023-04-06T16:20:30.9922079-05:00"
+  redis:
+  - annotations:
+      category: Database
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 7.0.10
+    created: "2023-04-07T13:49:58.4284722-05:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Redis(R) is an open source, advanced key-value store. It is often
+      referred to as a data structure server since keys can contain strings, hashes,
+      lists, sets and sorted sets.
+    digest: 9e8718b9c13989546b1c22d4f6a9fb79d0c2dbd32a1069e0f7c9bbb3f66d42db
+    home: https://github.com/bitnami/charts/tree/main/bitnami/redis
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: redis
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/redis
+    urls:
+    - https://nickmman.github.io/bitnami-charts-argocd-fixes/redis-17.9.4.tgz
+    version: 17.9.4
+generated: "2023-04-07T13:49:58.40758-05:00"
