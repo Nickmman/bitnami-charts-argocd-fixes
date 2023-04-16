@@ -341,7 +341,9 @@ spec:
             claimName: {{ .Values.master.persistence.existingClaim }}
   {{- else }}
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: "data"
         annotations:
           {{- if .Values.master.persistence.annotations }}
