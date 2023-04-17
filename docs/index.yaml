@@ -6,7 +6,41 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 8.6.2
-    created: "2023-04-16T16:50:06.6603268-04:00"
+    created: "2023-04-17T00:08:13.5601262-04:00"
+    dependencies:
+    - condition: global.kibanaEnabled
+      name: kibana
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Elasticsearch is a distributed search and analytics engine. It is
+      used for web search, log monitoring, and real-time analytics. Ideal for Big
+      Data applications.
+    digest: 25116bd6d530a751817e0d6ef8fb504a35f12c6f86e7e7a7061b92d4fc0f2747
+    home: https://github.com/bitnami/charts/tree/main/bitnami/elasticsearch
+    icon: https://bitnami.com/assets/stacks/elasticsearch/img/elasticsearch-stack-220x234.png
+    keywords:
+    - elasticsearch
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: elasticsearch
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch
+    - https://www.elastic.co/products/elasticsearch
+    urls:
+    - https://nickmman.github.io/bitnami-charts-argocd-fixes/elasticsearch-19.6.2.tgz
+    version: 19.6.2
+  - annotations:
+      category: Analytics
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 8.6.2
+    created: "2023-04-17T00:08:13.550054-04:00"
     dependencies:
     - condition: global.kibanaEnabled
       name: kibana
@@ -41,7 +75,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 6.0.5
-    created: "2023-04-16T16:50:06.6982231-04:00"
+    created: "2023-04-17T00:08:13.5927365-04:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -77,7 +111,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 3.11.13
-    created: "2023-04-16T16:50:07.1843113-04:00"
+    created: "2023-04-17T00:08:13.6240787-04:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -110,7 +144,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.10
-    created: "2023-04-16T16:50:07.2647657-04:00"
+    created: "2023-04-17T00:08:13.6960887-04:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -141,7 +175,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.10
-    created: "2023-04-16T16:50:07.2249478-04:00"
+    created: "2023-04-17T00:08:13.6612074-04:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -167,4 +201,4 @@ entries:
     urls:
     - https://nickmman.github.io/bitnami-charts-argocd-fixes/redis-17.9.4.tgz
     version: 17.9.4
-generated: "2023-04-16T16:50:06.6493461-04:00"
+generated: "2023-04-17T00:08:13.5069058-04:00"
