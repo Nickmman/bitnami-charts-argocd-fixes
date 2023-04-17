@@ -10,8 +10,8 @@ metadata:
     {{- if .Values.service.labels }}
     {{- include "common.tplvalues.render" (dict "value" .Values.service.labels "context" $) | nindent 4 }}
     {{- end }}
-  annotations:
     {{- if .Values.commonAnnotations }}
+  annotations:
     {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $) | nindent 4 }}
     {{- end }}
     {{- if .Values.service.annotations }}
