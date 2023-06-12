@@ -11,8 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-helm repo add my-repo https://charts.bitnami.com/bitnami
-helm install my-release my-repo/metallb
+helm install my-release oci://registry-1.docker.io/bitnamicharts/metallb
 ```
 
 ## Introduction
@@ -34,8 +33,7 @@ Bitnami charts can be used with [Kubeapps](https://kubeapps.dev/) for deployment
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add my-repo https://charts.bitnami.com/bitnami
-helm install my-release my-repo/metallb
+helm install my-release oci://registry-1.docker.io/bitnamicharts/metallb
 ```
 
 These commands deploy metallb on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
@@ -93,7 +91,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `controller.image.registry`                                    | MetalLB Controller image registry                                                                                                           | `docker.io`                  |
 | `controller.image.repository`                                  | MetalLB Controller image repository                                                                                                         | `bitnami/metallb-controller` |
-| `controller.image.tag`                                         | MetalLB Controller  image tag (immutable tags are recommended)                                                                              | `0.13.9-debian-11-r12`       |
+| `controller.image.tag`                                         | MetalLB Controller  image tag (immutable tags are recommended)                                                                              | `0.13.10-debian-11-r0`       |
 | `controller.image.digest`                                      | MetalLB Controller image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag                          | `""`                         |
 | `controller.image.pullPolicy`                                  | MetalLB Controller image pull policy                                                                                                        | `IfNotPresent`               |
 | `controller.image.pullSecrets`                                 | Specify docker-registry secret names as an array                                                                                            | `[]`                         |
@@ -188,7 +186,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `speaker.enabled`                                           | Whether to enable BGP speakers or not                                                                                                       | `true`                    |
 | `speaker.image.registry`                                    | MetalLB Speaker image registry                                                                                                              | `docker.io`               |
 | `speaker.image.repository`                                  | MetalLB Speaker image repository                                                                                                            | `bitnami/metallb-speaker` |
-| `speaker.image.tag`                                         | MetalLB Speaker  image tag (immutable tags are recommended)                                                                                 | `0.13.9-debian-11-r11`    |
+| `speaker.image.tag`                                         | MetalLB Speaker  image tag (immutable tags are recommended)                                                                                 | `0.13.9-debian-11-r31`    |
 | `speaker.image.digest`                                      | MetalLB Speaker image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag                             | `""`                      |
 | `speaker.image.pullPolicy`                                  | MetalLB Speaker image pull policy                                                                                                           | `IfNotPresent`            |
 | `speaker.image.pullSecrets`                                 | Specify docker-registry secret names as an array                                                                                            | `[]`                      |
@@ -279,7 +277,7 @@ The command removes all the Kubernetes components associated with the chart and 
 ```console
 helm install my-release \
   --set readinessProbe.successThreshold=5 \
-    my-repo/metallb
+    oci://registry-1.docker.io/bitnamicharts/metallb
 ```
 
 The above command sets the `readinessProbe.successThreshold` to `5`.
@@ -389,7 +387,7 @@ New versions are not going to be affected. Once a new version is released in the
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

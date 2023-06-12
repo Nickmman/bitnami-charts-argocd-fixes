@@ -11,8 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-helm repo add my-repo https://charts.bitnami.com/bitnami
-helm install my-release my-repo/flink
+helm install my-release oci://registry-1.docker.io/bitnamicharts/flink
 ```
 
 ## Introduction
@@ -33,8 +32,7 @@ Bitnami charts can be used with [Kubeapps](https://kubeapps.dev/) for deployment
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add my-repo https://charts.bitnami.com/bitnami
-helm install my-release my-repo/flink
+helm install my-release oci://registry-1.docker.io/bitnamicharts/flink
 ```
 
 These commands deploy flink on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
@@ -77,15 +75,15 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ### Apache Flink parameters
 
-| Name                | Description                                                                                                  | Value                 |
-| ------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------- |
-| `image.registry`    | Apache Flink image registry                                                                                  | `docker.io`           |
-| `image.repository`  | Apache Flink image repository                                                                                | `bitnami/flink`       |
-| `image.tag`         | Apache Flink image tag (immutable tags are recommended)                                                      | `1.16.1-debian-11-r0` |
-| `image.digest`      | Apache Flink image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`                  |
-| `image.pullPolicy`  | image pull policy                                                                                            | `IfNotPresent`        |
-| `image.pullSecrets` | Apache Flink image pull secrets                                                                              | `[]`                  |
-| `image.debug`       | Enable image debug mode                                                                                      | `false`               |
+| Name                | Description                                                                                                  | Value                  |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| `image.registry`    | Apache Flink image registry                                                                                  | `docker.io`            |
+| `image.repository`  | Apache Flink image repository                                                                                | `bitnami/flink`        |
+| `image.tag`         | Apache Flink image tag (immutable tags are recommended)                                                      | `1.16.1-debian-11-r17` |
+| `image.digest`      | Apache Flink image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`                   |
+| `image.pullPolicy`  | image pull policy                                                                                            | `IfNotPresent`         |
+| `image.pullSecrets` | Apache Flink image pull secrets                                                                              | `[]`                   |
+| `image.debug`       | Enable image debug mode                                                                                      | `false`                |
 
 ### Jobmanager deployment parameters
 
@@ -297,7 +295,7 @@ Find more information about how to deal with common errors related to Bitnami's 
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

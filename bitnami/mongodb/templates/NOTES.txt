@@ -55,7 +55,7 @@ IPs for MongoDB&reg; nodes. To complete your deployment follow the steps below:
 
 3. Upgrade you chart:
 
-    helm upgrade --namespace {{ .Release.Namespace }} {{ .Release.Name }} my-repo/{{ .Chart.Name }} \
+    helm upgrade --namespace {{ .Release.Namespace }} {{ .Release.Name }} oci://registry-1.docker.io/bitnamicharts/{{ .Chart.Name }} \
       --set mongodb.replicaCount={{ $replicaCount }} \
       --set mongodb.externalAccess.enabled=true \
       {{- range $i, $e := until $replicaCount }}
@@ -117,9 +117,9 @@ To connect to your database, create a MongoDB&reg; client container:
 Then, run the following command:
 
     {{- if eq .Values.architecture "replicaset" }}
-    mongosh admin --host "{{ join "," $mongoList }}" {{- if .Values.auth.enabled }} --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD{{- end }}
+    mongosh admin --host "{{ join "," $mongoList }}" {{- if .Values.auth.enabled }} --authenticationDatabase admin -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD{{- end }}
     {{- else }}
-    mongosh admin --host "{{ template "mongodb.service.nameOverride" . }}" {{- if .Values.auth.enabled }} --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD{{- end }}
+    mongosh admin --host "{{ template "mongodb.service.nameOverride" . }}" {{- if .Values.auth.enabled }} --authenticationDatabase admin -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD{{- end }}
     {{- end }}
 
 {{- if and (eq .Values.architecture "replicaset") .Values.externalAccess.enabled }}

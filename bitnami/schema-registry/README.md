@@ -11,8 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-helm repo add my-repo https://charts.bitnami.com/bitnami
-helm install my-release my-repo/schema-registry
+helm install my-release oci://registry-1.docker.io/bitnamicharts/schema-registry
 ```
 
 ## Introduction
@@ -33,8 +32,7 @@ Bitnami charts can be used with [Kubeapps](https://kubeapps.com/) for deployment
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add my-repo https://charts.bitnami.com/bitnami
-helm install my-release my-repo/schema-registry
+helm install my-release oci://registry-1.docker.io/bitnamicharts/schema-registry
 ```
 
 These commands deploy Schema Registry on the Kubernetes cluster with the default configuration. The [parameters](#parameters) section lists the parameters that can be configured during installation.
@@ -83,7 +81,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `image.registry`                                | Schema Registry image registry                                                                                  | `docker.io`               |
 | `image.repository`                              | Schema Registry image repository                                                                                | `bitnami/schema-registry` |
-| `image.tag`                                     | Schema Registry image tag (immutable tags are recommended)                                                      | `7.3.3-debian-11-r1`      |
+| `image.tag`                                     | Schema Registry image tag (immutable tags are recommended)                                                      | `7.4.0-debian-11-r0`      |
 | `image.digest`                                  | Schema Registry image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`                      |
 | `image.pullPolicy`                              | Schema Registry image pull policy                                                                               | `IfNotPresent`            |
 | `image.pullSecrets`                             | Schema Registry image pull secrets                                                                              | `[]`                      |
@@ -222,37 +220,21 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ### Kafka chart parameters
 
-| Name                                             | Description                                                                                                         | Value                            |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| `kafka.enabled`                                  | Enable/disable Kafka chart installation                                                                             | `true`                           |
-| `kafka.replicaCount`                             | Number of Kafka brokers                                                                                             | `1`                              |
-| `kafka.auth.clientProtocol`                      | Authentication protocol for communications with clients. Allowed protocols: plaintext, tls, mtls, sasl and sasl_tls | `plaintext`                      |
-| `kafka.auth.interBrokerProtocol`                 | Authentication protocol for inter-broker communications. Allowed protocols: plaintext, tls, mtls, sasl and sasl_tls | `plaintext`                      |
-| `kafka.auth.tls.existingSecrets`                 | Array existing secrets containing the TLS certificates for the Kafka brokers                                        | `[]`                             |
-| `kafka.auth.tls.password`                        | Password to access the JKS files or PEM key when they are password-protected.                                       | `""`                             |
-| `kafka.auth.tls.endpointIdentificationAlgorithm` | The endpoint identification algorithm to validate server hostname using server certificate                          | `https`                          |
-| `kafka.auth.sasl.jaas.clientUsers`               | Kafka client users for SASL authentication                                                                          | `[]`                             |
-| `kafka.auth.sasl.jaas.clientPasswords`           | Kafka client passwords for SASL authentication                                                                      | `[]`                             |
-| `kafka.auth.sasl.jaas.interBrokerUser`           | Kafka inter broker communication user for SASL authentication                                                       | `admin`                          |
-| `kafka.auth.sasl.jaas.interBrokerPassword`       | Kafka inter broker communication password for SASL authentication                                                   | `""`                             |
-| `kafka.auth.sasl.jaas.zookeeperUser`             | Kafka Zookeeper user for SASL authentication                                                                        | `""`                             |
-| `kafka.auth.sasl.jaas.zookeeperPassword`         | Kafka Zookeeper password for SASL authentication                                                                    | `""`                             |
-| `kafka.auth.sasl.jaas.existingSecret`            | Name of the existing secret containing credentials for brokerUser, interBrokerUser and zookeeperUser                | `""`                             |
-| `kafka.service.ports.client`                     | Kafka service port for client connections                                                                           | `9092`                           |
-| `kafka.zookeeper.enabled`                        | Enable/disable Zookeeper chart installation                                                                         | `true`                           |
-| `kafka.zookeeper.replicaCount`                   | Number of Zookeeper replicas                                                                                        | `1`                              |
-| `kafka.zookeeper.auth`                           | Zookeeper auth settings                                                                                             | `{}`                             |
-| `externalKafka.brokers`                          | Array of Kafka brokers to connect to. Format: protocol://broker_hostname:port                                       | `["PLAINTEXT://localhost:9092"]` |
-| `externalKafka.auth.protocol`                    | Authentication protocol. Allowed protocols: plaintext, tls, sasl and sasl_tls                                       | `plaintext`                      |
-| `externalKafka.auth.jaas.user`                   | User for SASL authentication                                                                                        | `user`                           |
-| `externalKafka.auth.jaas.password`               | Password for SASL authentication                                                                                    | `""`                             |
+| Name                               | Description                                                                   | Value                            |
+| ---------------------------------- | ----------------------------------------------------------------------------- | -------------------------------- |
+| `kafka.enabled`                    | Enable/disable Kafka chart installation                                       | `true`                           |
+| `kafka.replicaCount`               | Number of Kafka brokers                                                       | `1`                              |
+| `externalKafka.brokers`            | Array of Kafka brokers to connect to. Format: protocol://broker_hostname:port | `["PLAINTEXT://localhost:9092"]` |
+| `externalKafka.auth.protocol`      | Authentication protocol. Allowed protocols: plaintext, tls, sasl and sasl_tls | `plaintext`                      |
+| `externalKafka.auth.jaas.user`     | User for SASL authentication                                                  | `user`                           |
+| `externalKafka.auth.jaas.password` | Password for SASL authentication                                              | `""`                             |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
 helm install my-release \
   --set replicaCount=2 \
-    my-repo/schema-registry
+    oci://registry-1.docker.io/bitnamicharts/schema-registry
 ```
 
 The above command installs Schema Registry chart with 2 replicas.
@@ -260,7 +242,7 @@ The above command installs Schema Registry chart with 2 replicas.
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml my-repo/schema-registry
+helm install my-release -f values.yaml oci://registry-1.docker.io/bitnamicharts/schema-registry
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
@@ -407,6 +389,10 @@ For annotations, please see [this document](https://github.com/kubernetes/ingres
 
 ## Upgrading
 
+### To 10.0.0
+
+This major updates the Kafka subchart to its newest major, 22.0.0. This new version of Kafka uses Kraft by default. For more information on this subchart's major, please refer to [Kafka upgrade notes](https://github.com/bitnami/charts/tree/main/bitnami/kafka#to-2200).
+
 ### To 9.0.0
 
 This major updates the Kafka subchart to its newest major, 21.0.0. For more information on this subchart's major, please refer to [Kafka upgrade notes](https://github.com/bitnami/charts/tree/main/bitnami/kafka#to-2100).
@@ -467,7 +453,7 @@ Find more information about how to deal with common errors related to Bitnami's 
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

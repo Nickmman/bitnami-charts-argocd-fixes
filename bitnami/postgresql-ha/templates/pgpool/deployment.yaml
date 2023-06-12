@@ -132,7 +132,7 @@ spec:
           env:
             - name: BITNAMI_DEBUG
               value: {{ ternary "true" "false" (or .Values.pgpool.image.debug .Values.diagnosticMode.enabled) | quote }}
-            {{- if or .Values.pgpool.customUsersSecret .Values.pgpool.customUsers }}
+            {{- if or .Values.pgpool.customUsersSecret .Values.pgpool.customUsers.usernames }}
             - name: PGPOOL_POSTGRES_CUSTOM_USERS
               valueFrom:
                 secretKeyRef:
@@ -277,6 +277,12 @@ spec:
             - name: PGPOOL_TLS_CA_FILE
               value: {{ template "postgresql-ha.pgpool.tlsCACert" . }}
             {{- end }}
+            {{- end }}
+            - name: PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT
+            {{- if .Values.pgpool.customLivenessProbe }}
+              value: {{ add 1 (default 1 .Values.pgpool.customLivenessProbe.timeoutSeconds) | quote }}
+            {{- else }}
+              value: {{ add 1 (default 1 .Values.pgpool.livenessProbe.timeoutSeconds) | quote }}
             {{- end }}
             {{- if .Values.pgpool.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.pgpool.extraEnvVars "context" $) | nindent 12 }}
