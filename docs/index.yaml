@@ -6,7 +6,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 8.7.0
-    created: "2023-04-17T02:28:10.7818004-04:00"
+    created: "2023-06-12T21:00:38.3014872-03:00"
     dependencies:
     - condition: global.kibanaEnabled
       name: kibana
@@ -40,7 +40,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 8.7.0
-    created: "2023-04-17T02:28:10.7697999-04:00"
+    created: "2023-06-12T21:00:38.2927651-03:00"
     dependencies:
     - condition: global.kibanaEnabled
       name: kibana
@@ -74,7 +74,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 8.6.2
-    created: "2023-04-17T02:28:10.7582834-04:00"
+    created: "2023-06-12T21:00:38.2813151-03:00"
     dependencies:
     - condition: global.kibanaEnabled
       name: kibana
@@ -109,7 +109,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 8.7.0
-    created: "2023-04-17T02:28:10.7847993-04:00"
+    created: "2023-06-12T21:00:38.3054874-03:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -143,8 +143,42 @@ entries:
       category: Database
       licenses: Apache-2.0
     apiVersion: v2
+    appVersion: 6.0.6
+    created: "2023-06-12T21:00:38.3144859-03:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: MongoDB(R) is an open source NoSQL database that uses JSON for data
+      storage. MongoDB(TM) Sharded improves scalability and reliability for large
+      datasets by distributing data across multiple machines.
+    digest: 944a8a06887d4186ea63378072e4985a4c1347f4cbccaadae843e0a4186fd265
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - name: VMware, Inc.
+      url: https://github.com/bitnami/charts
+    name: mongodb-sharded
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/mongodb-sharded
+    urls:
+    - https://nickmman.github.io/bitnami-charts-argocd-fixes/mongodb-sharded-6.5.4.tgz
+    version: 6.5.4
+  - annotations:
+      category: Database
+      licenses: Apache-2.0
+    apiVersion: v2
     appVersion: 6.0.5
-    created: "2023-04-17T02:28:10.7903794-04:00"
+    created: "2023-06-12T21:00:38.3104943-03:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -180,7 +214,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 3.11.13
-    created: "2023-04-17T02:28:10.7953214-04:00"
+    created: "2023-06-12T21:00:38.3195198-03:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -212,8 +246,39 @@ entries:
       category: Database
       licenses: Apache-2.0
     apiVersion: v2
+    appVersion: 7.0.11
+    created: "2023-06-12T21:00:38.3245187-03:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Redis(R) is an open source, advanced key-value store. It is often
+      referred to as a data structure server since keys can contain strings, hashes,
+      lists, sets and sorted sets.
+    digest: 8cf442ff9b4e973546daf8071e23b0ed9e6566e6b904506e061aeba089e902b1
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - name: VMware, Inc.
+      url: https://github.com/bitnami/charts
+    name: redis
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/redis
+    urls:
+    - https://nickmman.github.io/bitnami-charts-argocd-fixes/redis-17.11.3.tgz
+    version: 17.11.3
+  - annotations:
+      category: Database
+      licenses: Apache-2.0
+    apiVersion: v2
     appVersion: 7.0.10
-    created: "2023-04-17T02:28:10.8083206-04:00"
+    created: "2023-06-12T21:00:38.3364871-03:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -244,7 +309,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.10
-    created: "2023-04-17T02:28:10.8013199-04:00"
+    created: "2023-06-12T21:00:38.3314873-03:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -270,4 +335,4 @@ entries:
     urls:
     - https://nickmman.github.io/bitnami-charts-argocd-fixes/redis-17.9.4.tgz
     version: 17.9.4
-generated: "2023-04-17T02:28:10.7472859-04:00"
+generated: "2023-06-12T21:00:38.2710616-03:00"
