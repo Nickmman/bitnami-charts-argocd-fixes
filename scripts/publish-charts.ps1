@@ -7,20 +7,22 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-Write-Host "🏗️ Packaging Helm charts..."
+Write-Host "🏗️  Packaging Helm charts..."
 
+# --- Check prerequisites ---
 if (-not (Get-Command helm -ErrorAction SilentlyContinue)) {
     Write-Error "Helm CLI not found. Please install Helm and retry."
+    exit 1
 }
 
-# Always start from main
+# --- Always start from main ---
 git checkout main | Out-Null
 
-# Clean build folder
+# --- Clean build folder ---
 Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force -Path build | Out-Null
 
-# Determine which charts to package
+# --- Determine which chart(s) to package ---
 if ($Chart -ne "") {
     $chartPath = Join-Path "bitnami" $Chart
     if (-not (Test-Path "$chartPath\Chart.yaml")) {
@@ -28,7 +30,11 @@ if ($Chart -ne "") {
         exit 1
     }
     Write-Host "📦 Packaging single chart: $chartPath"
-    helm dependency update $chartPath | Out-Null
+    try {
+        helm dependency update $chartPath | Out-Null
+    } catch {
+        Write-Warning "Dependency update failed or not needed for $chartPath. Continuing."
+    }
     helm package $chartPath -d build | Out-Null
 }
 else {
@@ -50,37 +56,59 @@ else {
     }
 }
 
-# Abort if no packages were created
+# --- Abort if nothing was packaged ---
 if (-not (Test-Path build\*.tgz)) {
     Write-Warning "No .tgz packages produced. Aborting publish."
     exit 0
 }
 
-# Checkout the releases branch
+# --- Prepare to switch branches ---
+Write-Host "🔁 Preparing to switch to '$Branch' branch..."
+
+# Stash local changes (Chart.lock updates, etc.)
+$hasChanges = (git status --porcelain)
+if ($hasChanges) {
+    Write-Host "💾 Stashing local changes..."
+    git stash push -m "temp stash before switching to $Branch" | Out-Null
+}
+
+# --- Switch to releases branch ---
 git fetch origin $Branch | Out-Null
 git checkout $Branch | Out-Null
-git pull origin $Branch | Out-Null
 
-# Move packaged charts to root
+# --- Move packaged charts ---
 Get-ChildItem build\*.tgz | ForEach-Object { Move-Item $_.FullName . -Force }
 
-# Generate or update index.yaml
+# --- Generate or update index.yaml ---
 if (Test-Path "index.yaml") {
     helm repo index . --url $PagesUrl --merge index.yaml
 } else {
     helm repo index . --url $PagesUrl
 }
 
-# Ensure .nojekyll exists
-if (-not (Test-Path ".nojekyll")) { New-Item -ItemType File -Name ".nojekyll" | Out-Null }
+# --- Ensure .nojekyll exists ---
+if (-not (Test-Path ".nojekyll")) {
+    New-Item -ItemType File -Name ".nojekyll" | Out-Null
+}
 
-# Commit and push changes
+# --- Commit and push ---
 git add .
-$commitMsg = if ($Chart -ne "") { "📦 Publish $Chart chart $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" } else { "📦 Publish all charts $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" }
+$commitMsg = if ($Chart -ne "") { 
+    "📦 Publish $Chart chart $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" 
+} else { 
+    "📦 Publish all charts $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" 
+}
 git commit -m $commitMsg -q || Write-Host "No changes to commit."
 git push origin $Branch
 
-# Return to main
+# --- Return to main ---
 git checkout main | Out-Null
 
-Write-Host "✅ Published. Helm repo index: $PagesUrl/index.yaml"
+# --- Restore stashed changes ---
+if ($hasChanges) {
+    Write-Host "🔄 Restoring stashed changes..."
+    git stash pop | Out-Null
+}
+
+Write-Host "✅ Published successfully!"
+Write-Host "📂 Helm repo index: $PagesUrl/index.yaml"
